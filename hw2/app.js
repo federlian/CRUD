@@ -55,5 +55,6 @@ app.post('/signup', ((req, res) => {
 }));
 
 app.listen(5001, () => {
+    // eslint-disable-next-line no-console
     console.log('App listen 5000');
 });

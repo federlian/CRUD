@@ -1,12 +1,11 @@
-const { users } = require('../dataBase');
+const userServices = require('../services/user.services');
 
 module.exports = {
-    isUser: (req, res, next) => {
+    checkUserInDb: (req, res, next) => {
         try {
             const { email, password } = req.body;
-            const search = users.find((user) => user.email === email && user.password === password);
 
-            if (search) {
+            if (email && password) {
                 throw new Error('User already created');
             }
 
@@ -16,12 +15,13 @@ module.exports = {
         }
     },
 
-    checkUsers: (req, res, next) => {
+    checkUserExist: (req, res, next) => {
         try {
-            const usersList = req.body;
+            const { id } = req.params;
+            const usersList = userServices.findUserById(id);
 
-            if (!usersList) {
-                throw new Error('Users not found');
+            if (!usersList.length) {
+                throw new Error('Users not registered');
             }
 
             next();
@@ -30,10 +30,10 @@ module.exports = {
         }
     },
 
-    checkMail: (req, res, next) => {
+    checkUsersByEmail: (req, res, next) => {
         try {
             const { email } = req.body;
-            const searchEmail = users.find((user) => user.email === email);
+            const searchEmail = userServices.findUserByEmail(email);
 
             if (!searchEmail) {
                 throw new Error('Email not found');

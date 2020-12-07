@@ -4,10 +4,10 @@ const { userMiddleware } = require('../middlewares');
 
 const userRouter = Router();
 
-userRouter.get('/', userMiddleware.checkUsers, userController.getUsers);
-userRouter.post('/', userMiddleware.checkUsers, userController.createUser);
-userRouter.get('/:id', userMiddleware.checkUsers, userController.getUserById);
-userRouter.get('/:email', userMiddleware.checkUsers, userController.getUserByEmail);
-userRouter.delete('/:email', userMiddleware.checkUsers, userMiddleware.checkMail, userController.deleteUser);
+userRouter.get('/', userMiddleware.checkUserInDb, userController.getUsers);
+userRouter.post('/', userMiddleware.checkUserExist, userController.createUser);
+userRouter.get('/:id', userMiddleware.checkUserExist, userController.getUserById);
+userRouter.get('/:email', userMiddleware.checkUserExist, userController.getUserByEmail);
+userRouter.delete('/:email', userMiddleware.checkUserExist, userMiddleware.checkUsersByEmail, userController.deleteUser);
 
 module.exports = userRouter;

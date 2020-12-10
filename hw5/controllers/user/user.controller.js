@@ -6,7 +6,7 @@ module.exports = {
         try {
             await userService.insertUser(req.body);
 
-            res.status(USER_CREATED);
+            res.status(USER_CREATED.code).json(USER_CREATED.message);
         } catch (e) {
             next(e);
         }
@@ -19,7 +19,7 @@ module.exports = {
 
             await userService.findAllUsers(where, +limit, +offset);
 
-            res.status(OK_REQUEST);
+            res.status(OK_REQUEST.code).json(OK_REQUEST.message);
         } catch (e) {
             next(e);
         }
@@ -29,7 +29,7 @@ module.exports = {
         try {
             await res.json(req.user);
 
-            res.status(OK_REQUEST);
+            res.status(OK_REQUEST.code).json(OK_REQUEST.message);
         } catch (e) {
             next(e);
         }
@@ -41,7 +41,7 @@ module.exports = {
 
             await userService.updateUser(userId, req.body);
 
-            res.status(OK_REQUEST);
+            res.status(OK_REQUEST.code).json(OK_REQUEST.message);
         } catch (e) {
             next(e);
         }
@@ -53,7 +53,7 @@ module.exports = {
 
             await userService.removeUser(userId);
 
-            res.status(USER_DELETED);
+            res.status(USER_DELETED.code).json(USER_DELETED.message);
         } catch (e) {
             next(e);
         }

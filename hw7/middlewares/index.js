@@ -3,5 +3,5 @@ module.exports = {
     validationMiddleware: require('./validation/validation.middleware'),
     loginMiddleware: require('./login'),
     carMiddleware: require('./cars/car.middleware'),
-    validationCarMiddleware: require('./validation/validationCar.middleware')
+    validationCarMiddleware: require('./validation/validationCar.middleware'),
 };

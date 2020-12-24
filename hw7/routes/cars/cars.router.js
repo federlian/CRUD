@@ -6,7 +6,8 @@ const { carMiddleware, validationCarMiddleware, loginMiddleware } = require('../
 const carRouter = Router();
 
 carRouter.get('/', validationCarMiddleware.checkInBase, carsController.getCars);
-carRouter.post('/', validationCarMiddleware.isCarCreateCorrect, loginMiddleware.checkAccessToken, carsController.createCar);
+carRouter.post('/', validationCarMiddleware.isCarCreateCorrect,
+    loginMiddleware.checkAccessTokens.checkAccessToken, carsController.createCar);
 carRouter.use('/:userId', validationCarMiddleware.isCarIdCorrect, carMiddleware.checkCarById);
 carRouter.get('/:userId', carsController.getCarById);
 carRouter.put('/:userId', validationCarMiddleware.isCarUpdateCorrect, carsController.updateCar);

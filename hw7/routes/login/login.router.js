@@ -12,6 +12,6 @@ loginRouter.post('/', validationMiddleware.isUserCreateCorrect,
 
 loginRouter.post('/logout', loginController.logoutUser);
 
-loginRouter.post('/refresh', loginMiddleware.checkRefreshToken, loginController.refreshToken);
+loginRouter.post('/refresh', loginMiddleware.checkRefreshTokens.checkRefreshToken, loginController.refreshToken);
 
 module.exports = loginRouter;

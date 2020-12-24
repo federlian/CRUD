@@ -5,7 +5,8 @@ const { userMiddleware, validationMiddleware, loginMiddleware } = require('../..
 
 const userRouter = Router();
 
-userRouter.use('/:userId', validationMiddleware.isIdCorrect, userMiddleware.checkUserById, loginMiddleware.checkAccessToken);
+userRouter.use('/:userId', validationMiddleware.isIdCorrect, userMiddleware.checkUserById,
+    loginMiddleware.checkAccessTokens.checkAccessToken);
 userRouter.get('/:userId', userController.getUserById);
 userRouter.put('/:userId', validationMiddleware.isUserUpdateCorrect, userMiddleware.checkUsersByEmail, userController.updateUser);
 userRouter.delete('/:userId', userController.deleteUser);

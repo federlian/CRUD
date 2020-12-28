@@ -1,7 +1,11 @@
 const { Router } = require('express');
 
 const { userController } = require('../../controllers');
-const { userMiddleware, validationMiddleware, fileMiddleware } = require('../../middlewares');
+const {
+    fileMiddleware,
+    userMiddleware,
+    validationMiddleware
+} = require('../../middlewares');
 
 const userRouter = Router();
 

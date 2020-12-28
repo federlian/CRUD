@@ -1,6 +1,8 @@
+const { MODEL_DOCUMENT, TABLE_NAME_DOCUMENTS } = require('../../constants/constants');
+
 module.exports = (client, DataTypes) => {
     const Document = client.define(
-        'Document',
+        MODEL_DOCUMENT,
         {
             id: {
                 type: DataTypes.INTEGER,
@@ -20,7 +22,7 @@ module.exports = (client, DataTypes) => {
 
         },
         {
-            tableName: 'documents',
+            tableName: TABLE_NAME_DOCUMENTS,
             timestamps: false
         }
     );

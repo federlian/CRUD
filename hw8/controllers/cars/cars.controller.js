@@ -1,19 +1,21 @@
 const fs = require('fs-extra').promises;
 const path = require('path');
-const uuid = require('uuid');
+const uuid = require('uuid').v1();
 
 const { carService } = require('../../services');
+const { PUBLIC_CARS_PATH, PUBLIC_CARS_FILES_PATH, PUBLIC_PATH } = require('../../constants/constants');
 const { errors: { CAR_CREATED, OK_REQUEST } } = require('../../error');
 
 module.exports = {
 
     createCar: async (req, res, next) => {
         try {
+            const { photos, docs } = req;
+
             const car = await carService.createCar(req.body);
 
-            const { photos, docs } = req;
-            const pathWithoutPublic = path.join('cars', `${car.id}`, 'files');
-            const fileDir = path.join(process.cwd(), 'public', pathWithoutPublic);
+            const pathWithoutPublic = path.join(PUBLIC_CARS_PATH, `${car.id}`, PUBLIC_CARS_FILES_PATH);
+            const fileDir = path.join(process.cwd(), PUBLIC_PATH, pathWithoutPublic);
 
             if (photos.length) {
                 await Promise.all(photos.map(async (i) => {
@@ -24,8 +26,6 @@ module.exports = {
                     await fs.mkdir(fileDir, { recursive: true });
                     await i.mv(path.join(fileDir, photo));
                     await carService.insertFileToCar({ car_id: car.id, path: finalPath });
-
-                    return 'File is upload';
                 }));
             }
 
@@ -38,12 +38,10 @@ module.exports = {
                     await fs.mkdir(fileDir, { recursive: true });
                     await i.mv(path.join(fileDir, doc));
                     await carService.insertFileToCar({ car_id: car.id, path: finalPath });
-
-                    return 'File is upload';
                 }));
             }
 
-            res.status(CAR_CREATED).json(car);
+            res.status(CAR_CREATED.code).json(CAR_CREATED.message);
         } catch (e) {
             next(e);
         }
@@ -87,7 +85,7 @@ module.exports = {
     deleteCar: async (req, res, next) => {
         try {
             const { carId } = req.params;
-            const pathFile = path.join(process.cwd(), 'public', 'car', carId);
+            const pathFile = path.join(process.cwd(), PUBLIC_PATH, PUBLIC_CARS_PATH, carId);
 
             await fs.rmdir(pathFile, { recursive: true });
             await carService.deleteCar(carId);

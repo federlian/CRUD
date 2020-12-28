@@ -1,6 +1,13 @@
+const {
+    MODEL_CAR,
+    TABLE_NAME_CARS,
+    CAR_ID,
+    CASCADE
+} = require('../../constants/constants');
+
 module.exports = (client, DataTypes) => {
     const Car = client.define(
-        'Car',
+        MODEL_CAR,
         {
             id: {
                 type: DataTypes.INTEGER,
@@ -29,7 +36,7 @@ module.exports = (client, DataTypes) => {
             }
         },
         {
-            tableName: 'cars',
+            tableName: TABLE_NAME_CARS,
             timestamps: false
         }
     );
@@ -37,8 +44,8 @@ module.exports = (client, DataTypes) => {
     const Doc = require('./Document')(client, DataTypes);
 
     Car.hasMany(Doc, {
-        foreignKey: 'car_id',
-        onDelete: 'CASCADE'
+        foreignKey: CAR_ID,
+        onDelete: CASCADE
     });
 
     return Car;

@@ -10,4 +10,5 @@ module.exports = {
     ROOT_EMAIL: process.env.ROOT_EMAIL,
     ROOT_EMAIL_PASSWORD: process.env.ROOT_EMAIL_PASSWORD,
     ROOT_EMAIL_SERVICE: process.env.ROOT_EMAIL_SERVICE,
+    HOST: process.env.HOST
 };

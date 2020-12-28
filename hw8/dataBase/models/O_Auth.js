@@ -1,6 +1,8 @@
+const { MODEL_O_AUTH, NOW, TABLE_NAME_O_AUTH } = require('../../constants/constants');
+
 module.exports = (client, DataTypes) => {
     const O_Auth = client.define(
-        'O_Auth',
+        MODEL_O_AUTH,
         {
             id: {
                 type: DataTypes.INTEGER,
@@ -22,11 +24,11 @@ module.exports = (client, DataTypes) => {
             },
             created_at: {
                 type: DataTypes.DATE,
-                defaultValue: client.fn('NOW')
+                defaultValue: client.fn(NOW)
             }
         },
         {
-            tableName: 'o_auth',
+            tableName: TABLE_NAME_O_AUTH,
             timestamps: false
         }
     );

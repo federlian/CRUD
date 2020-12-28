@@ -1,9 +1,11 @@
 const db = require('../../dataBase').getInstance();
 
+const { MODEL_CAR, MODEL_USER } = require('../../constants/constants');
+
 module.exports = {
     findAllUsers: (where = {}, limit = 10, offset = 0) => {
-        const UserModel = db.getModel('User');
-        const CarModel = db.getModel('Car');
+        const UserModel = db.getModel(MODEL_USER);
+        const CarModel = db.getModel(MODEL_CAR);
 
         return UserModel.findAll({
             where,
@@ -14,20 +16,20 @@ module.exports = {
     },
 
     insertUser: (user) => {
-        const UserModel = db.getModel('User');
+        const UserModel = db.getModel(MODEL_USER);
 
         return UserModel.create(user);
     },
 
     findUserById: (userId) => {
-        const UserModel = db.getModel('User');
-        const CarModel = db.getModel('Car');
+        const UserModel = db.getModel(MODEL_USER);
+        const CarModel = db.getModel(MODEL_CAR);
 
         return UserModel.findByPk(userId, { include: CarModel });
     },
 
     findUserByParams: (obj) => {
-        const UserModel = db.getModel('User');
+        const UserModel = db.getModel(MODEL_USER);
 
         return UserModel.findOne({
             where: obj
@@ -35,7 +37,7 @@ module.exports = {
     },
 
     updateUser: (userId, newUser) => {
-        const UserModel = db.getModel('User');
+        const UserModel = db.getModel(MODEL_USER);
 
         return UserModel.update(newUser, {
             where: {
@@ -47,7 +49,7 @@ module.exports = {
     },
 
     removeUser: (userId) => {
-        const UserModel = db.getModel('User');
+        const UserModel = db.getModel(MODEL_USER);
 
         return UserModel.destroy({ where: { id: userId } });
     }

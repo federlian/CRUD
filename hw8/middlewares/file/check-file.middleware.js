@@ -5,6 +5,7 @@ const {
         WRONG_FILE_EXTENSION
     }
 } = require('../../error');
+
 const {
     DOCS_MIMETYPES,
     FILE_MAX_SIZE,

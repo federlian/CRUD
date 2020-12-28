@@ -33,6 +33,11 @@ module.exports = {
         code: BAD_REQUEST
     },
 
+    WRONG_TEMPLATE: {
+        message: 'Wrong template name',
+        code: BAD_REQUEST
+    },
+
     USER_CREATED: {
         message: 'User successfully created',
         code: CREATED

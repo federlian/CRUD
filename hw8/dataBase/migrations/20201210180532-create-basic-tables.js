@@ -1,6 +1,13 @@
+const {
+    CASCADE,
+    ID,
+    TABLE_NAME_CARS,
+    TABLE_NAME_USERS
+} = require('../../constants/constants');
+
 module.exports = {
     up: async (queryInterface, Sequelize) => {
-        await queryInterface.createTable('users', {
+        await queryInterface.createTable(TABLE_NAME_USERS, {
             id: {
                 type: Sequelize.INTEGER,
                 primaryKey: true,
@@ -28,7 +35,7 @@ module.exports = {
             }
         });
 
-        await queryInterface.createTable('cars', {
+        await queryInterface.createTable(TABLE_NAME_CARS, {
             id: {
                 type: Sequelize.INTEGER,
                 primaryKey: true,
@@ -53,11 +60,11 @@ module.exports = {
             user_id: {
                 type: Sequelize.INTEGER,
                 foreignKey: true,
-                onDelete: 'CASCADE',
-                onUpdate: 'CASCADE',
+                onDelete: CASCADE,
+                onUpdate: CASCADE,
                 references: {
-                    model: 'users',
-                    key: 'id'
+                    model: TABLE_NAME_USERS,
+                    key: ID
                 }
             }
         });
@@ -65,7 +72,7 @@ module.exports = {
 
     // eslint-disable-next-line no-unused-vars
     down: async (queryInterface, Sequelize) => {
-        await queryInterface.dropTable('cars');
-        await queryInterface.dropTable('users');
+        await queryInterface.dropTable(TABLE_NAME_CARS);
+        await queryInterface.dropTable(TABLE_NAME_USERS);
     }
 };

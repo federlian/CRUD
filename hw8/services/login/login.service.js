@@ -1,15 +1,17 @@
 const db = require('../../dataBase').getInstance();
 
+const { MODEL_USER, MODEL_O_AUTH } = require('../../constants/constants');
+
 module.exports = {
     createTokenPair: (tokenPair) => {
-        const OAuthModel = db.getModel('O_Auth');
+        const OAuthModel = db.getModel(MODEL_O_AUTH);
 
         return OAuthModel.create(tokenPair);
     },
 
     getTokenWithUserByParams: (findObject) => {
-        const OAuthModel = db.getModel('O_Auth');
-        const UserModel = db.getModel('User');
+        const OAuthModel = db.getModel(MODEL_O_AUTH);
+        const UserModel = db.getModel(MODEL_USER);
 
         return UserModel.findOne({
             include: {
@@ -20,7 +22,7 @@ module.exports = {
     },
 
     deleteByParams: (findObject) => {
-        const OAuthModel = db.getModel('O_Auth');
+        const OAuthModel = db.getModel(MODEL_O_AUTH);
 
         return OAuthModel.destroy({
             where: findObject

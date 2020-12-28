@@ -2,9 +2,10 @@ const fs = require('fs-extra').promises;
 const path = require('path');
 const uuid = require('uuid').v1();
 
-const { userServices, emailService } = require('../../services');
+const { PUBLIC_PATH, PUBLIC_USERS_PATH, PUBLIC_USERS_PHOTOS_PATH } = require('../../constants/constants');
 const { errors: { USER_CREATED, OK_REQUEST, USER_DELETED } } = require('../../error');
 const { passwordHelper: { hash } } = require('../../helpers');
+const { userServices, emailService } = require('../../services');
 const { WELCOME, ACCOUNT_DELETED } = require('../../constants/email-actions.enum');
 
 module.exports = {
@@ -18,8 +19,8 @@ module.exports = {
             const createUser = await userServices.insertUser(req.body);
 
             if (avatar) {
-                const pathWithoutPublic = path.join('user', `${createUser.id}`, 'photos');
-                const photoDir = path.join(process.cwd(), 'public', pathWithoutPublic);
+                const pathWithoutPublic = path.join(PUBLIC_USERS_PATH, `${createUser.id}`, PUBLIC_USERS_PHOTOS_PATH);
+                const photoDir = path.join(process.cwd(), PUBLIC_PATH, pathWithoutPublic);
                 const fileExtension = avatar.name.split('.').pop();
                 const photoName = `${uuid}.${fileExtension}`;
                 const finalPhotoPath = path.join(pathWithoutPublic, photoName);
@@ -31,6 +32,7 @@ module.exports = {
             }
 
             await emailService.sendMail(email, WELCOME, { username: name });
+
             res.status(USER_CREATED.code).json(USER_CREATED.message);
         } catch (e) {
             next(e);

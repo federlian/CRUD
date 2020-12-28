@@ -1,7 +1,9 @@
+const { TABLE_NAME_USERS, TABLE_NAME_CARS } = require('../../constants/constants');
+
 module.exports = {
     // eslint-disable-next-line no-unused-vars
     up: async (queryInterface, Sequelize) => {
-        await queryInterface.bulkInsert('users', [
+        await queryInterface.bulkInsert(TABLE_NAME_USERS, [
             {
                 id: 1,
                 name: 'Anna',
@@ -21,7 +23,7 @@ module.exports = {
                 password: 'nmklonuibuy'
             }
         ]);
-        await queryInterface.bulkInsert('cars', [
+        await queryInterface.bulkInsert(TABLE_NAME_CARS, [
             {
                 id: 1,
                 model: 'Lanos',
@@ -48,7 +50,7 @@ module.exports = {
 
     // eslint-disable-next-line no-unused-vars
     down: async (queryInterface, Sequelize) => {
-        await queryInterface.bulkDelete('users', null, {});
-        await queryInterface.bulkDelete('cars', null, {});
+        await queryInterface.bulkDelete(TABLE_NAME_USERS, null, {});
+        await queryInterface.bulkDelete(TABLE_NAME_CARS, null, {});
     }
 };

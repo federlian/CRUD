@@ -3,23 +3,24 @@ const { PHOTO_MAX_SIZE, PHOTOS_MIMETYPES } = require('../../constants/constants'
 
 module.exports = {
     checkAvatar: (req, res, next) => {
-        const photo = req.photos;
+        const { files } = req;
+        const photo = Object.values(files);
 
         try {
             if (photo.length > 1) {
                 throw new ErrorInstance(JUST_ONE_PHOTO.message, JUST_ONE_PHOTO.code);
             }
+            for (let i = 0; i < photo.length; i++) {
+                const { mimetype, size } = photo[i];
 
-            const { photos: { mimetype, size } } = req;
+                if (PHOTOS_MIMETYPES.includes(mimetype)) {
+                    if (PHOTO_MAX_SIZE < size) {
+                        throw new ErrorInstance(VERY_BIG_FILE.message, VERY_BIG_FILE.code);
+                    }
 
-            if (PHOTOS_MIMETYPES.includes(mimetype)) {
-                if (PHOTO_MAX_SIZE < size) {
-                    throw new ErrorInstance(VERY_BIG_FILE.message, VERY_BIG_FILE.code);
+                    req.avatar = photo[i];
                 }
             }
-
-            [req.avatar] = req.photos;
-
             next();
         } catch (e) {
             next(e);

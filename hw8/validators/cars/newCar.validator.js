@@ -7,4 +7,5 @@ module.exports = Joi.object({
     customer: Joi.string().required(),
     year: Joi.number().required().min(1990).max(CURRENT_YEAR)
         .required(),
+    user_id: Joi.number().integer().required()
 });

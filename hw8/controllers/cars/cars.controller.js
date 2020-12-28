@@ -1,8 +1,9 @@
+const fs = require('fs-extra').promises;
 const path = require('path');
 const uuid = require('uuid');
+
 const { carService } = require('../../services');
-const { errors: { OK_REQUEST } } = require('../../error');
-const fs = require('fs-extra').promises;
+const { errors: { CAR_CREATED, OK_REQUEST } } = require('../../error');
 
 module.exports = {
 
@@ -42,7 +43,7 @@ module.exports = {
                 }));
             }
 
-            res.status(OK_REQUEST).json(car);
+            res.status(CAR_CREATED).json(car);
         } catch (e) {
             next(e);
         }

@@ -32,8 +32,14 @@ module.exports = (client, DataTypes) => {
             tableName: 'cars',
             timestamps: false
         }
-
     );
+
+    const Doc = require('./Document')(client, DataTypes);
+
+    Car.hasMany(Doc, {
+        foreignKey: 'car_id',
+        onDelete: 'CASCADE'
+    });
 
     return Car;
 };

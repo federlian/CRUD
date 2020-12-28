@@ -16,7 +16,8 @@ module.exports = (client, DataTypes) => {
                 type: DataTypes.INTEGER,
                 foreignKey: true,
                 allowNull: false
-            }
+            },
+
         },
         {
             tableName: 'documents',

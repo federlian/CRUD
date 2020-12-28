@@ -44,7 +44,6 @@ module.exports = (client, DataTypes) => {
     User.hasMany(O_Auth, {
         foreignKey: 'user_id',
         onDelete: 'CASCADE',
-        onUpdate: 'CASCADE'
     });
 
     return User;

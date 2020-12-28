@@ -38,6 +38,11 @@ module.exports = {
         code: CREATED
     },
 
+    CAR_CREATED: {
+        message: 'Car successfully created',
+        code: CREATED
+    },
+
     OK_REQUEST: {
         message: 'The request has succeeded',
         code: OK

@@ -5,7 +5,8 @@ const { loginMiddleware, validationMiddleware } = require('../../middlewares');
 
 const loginRouter = Router();
 
-loginRouter.post('/', validationMiddleware.isUserCreateCorrect,
+loginRouter.post('/',
+    validationMiddleware.isUserCreateCorrect,
     loginMiddleware.checkPassword.checkPasswordHash,
     loginController.login);
 loginRouter.post('/logout', loginController.logoutUser);

@@ -1,7 +1,0 @@
-module.exports = {
-    userServices: require('./user/user.services'),
-    loginService: require('./login/login.service'),
-    carService: require('./cars/cars.services'),
-    emailService: require('./email/email.service'),
-    logService: require('./logs/logs.service')
-};

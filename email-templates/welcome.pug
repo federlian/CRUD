@@ -1,0 +1,10 @@
+extends template
+block content
+    div
+        | Hello #{username}
+        br
+        | Welcome to family
+        br
+        | Link to activation account:
+        br
+        a(href=`http://localhost:5000/confirmation/token=` + token) #{token}
